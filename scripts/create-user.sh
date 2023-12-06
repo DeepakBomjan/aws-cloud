@@ -4,7 +4,7 @@
 POLICY_ARN="arn:aws:iam::aws:policy/IAMUserChangePassword"  # Example policy, replace with the desired policy ARN
 
 # Loop to create multiple users
-for i in {1..5}; do
+for i in {5..6}; do
 
   USERNAME="iamuser$i"
   PASSWORD="user@123"

@@ -19,3 +19,9 @@
     ]
   }
   ```
+
+  ETYga^TP]j1d642_lkY!
+  https://176556394813.signin.aws.amazon.com/console?region=us-east-1
+  AKIASSG4UZE6TD6HFJUU
+  bJNgtFtM0iSauVSTu9CEvUZv9X1sN8d9n2gaBc9j
+  
