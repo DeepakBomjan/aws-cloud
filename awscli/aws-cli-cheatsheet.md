@@ -216,6 +216,20 @@ https://docs.aws.amazon.com/cli/latest/reference/s3api/index.html#cli-aws-s3api
 # list existing S3 buckets
 aws s3 ls
 
+aws s3 mb s3://nameofyourbucket # To create a new bucket.
+aws s3api put-object --bucket bucketname --key foldername/ # To create a new folder in a specific bucket.
+aws s3 ls myfifthbucket # To check what's in your bucket.
+aws s3 cp /filepath/filename s3://bucketname/foldername/ # To upload a file in your bucket.
+aws s3 rm s3://bucketname/foldername/filename # To delete a specific file in a bucket.
+aws s3 rm s3://bucketname/ --recursive --exclude "*.jpg" # Recursively deletes all objects under a specified bucket and prefix when passed with the parameter --recursive while excluding some objects by using an --exclude parameter.
+aws s3 rb s3://bucketname # To delete a bucket.
+
+aws s3 rb s3://bucketname --force # To force bucket deletion.
+
+aws s3 ls s3://bucketname/foldername/ # To check what's in a bucket.
+
+
+
 # create a bucket name, using the current date timestamp
 bucket_name=test_$(date "+%Y-%m-%d_%H-%M-%S")
 echo $bucket_name
