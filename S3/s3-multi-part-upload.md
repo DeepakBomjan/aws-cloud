@@ -60,3 +60,94 @@ aws configure set default.s3.max_concurrent_requests 20
 
 ## Use low-level aws s3api commands
 https://repost.aws/knowledge-center/s3-multipart-upload-cli
+
+
+### Commands
+```bash
+aws s3api create-multipart-upload --bucket DOC-EXAMPLE-BUCKET --key large_test_file
+```
+1. Split large file
+```bash
+# Syntax: split -b byte_count[K|k|M|m|G|g] [file] [prefix]
+split -b 100M OSR507V_vmware_1.0.0Di.iso ./OSR507V_vmware_1.0.0Di.iso
+```
+
+2. Run the following command to initiate a multipart upload and to retrieve the associated upload ID. The command returns a response that contains the **UploadID**:
+
+```bash
+% aws s3api create-multipart-upload --bucket testing234123241423 --key OSR507V_vmware_1.0.0Di.iso
+{
+    "ServerSideEncryption": "AES256",
+    "Bucket": "testing234123241423",
+    "Key": "OSR507V_vmware_1.0.0Di.iso",
+    "UploadId": "4VUqRgZUEJNaH3Kx_atia0VhS5yHFXy9Lhs2nZPK7vf7ie3ECSnTUF0YLFVP15eVACi69agkeQlHtOfbxAHrDIuTr_bELhYvzxASh8B0wdCeJfy8Idf7NK8H_2_BUg.I"
+}
+```
+3. Run the following command to upload the first part of the file. Replace all values with the values for your bucket, file, and multipart upload. The command returns a response that contains an **ETag** value for the part of the file that you uploaded. 
+```bash
+ aws s3api upload-part --bucket testing234123241423 --key OSR507V_vmware_1.0.0Di.iso --part-number 1 --body OSR507V_vmware_1.0.0Di.isoaa --upload-id 4VUqRgZUEJNaH3Kx_atia0VhS5yHFXy9Lhs2nZPK7vf7ie3ECSnTUF0YLFVP15eVACi69agkeQlHtOfbxAHrDIuTr_bELhYvzxASh8B0wdCeJfy8Idf7NK8H_2_BUg.I
+
+{
+    "ServerSideEncryption": "AES256",
+    "ETag": "\"ab47a9ed63009ce441aa366dc51f94cb\""
+}
+```
+
+4. list parts
+```bash
+aws s3api list-multipart-uploads --bucket  testing234123241423
+```
+5. After you upload all the file parts, run the following command to list the uploaded parts and confirm that the list is complete:
+```bash
+aws s3api list-parts --bucket testing234123241423 --key OSR507V_vmware_1.0.0Di.iso --upload-id 4VUqRgZUEJNaH3Kx_atia0VhS5yHFXy9Lhs2nZPK7vf7ie3ECSnTUF0YLFVP15eVACi69agkeQlHtOfbxAHrDIuTr_bELhYvzxASh8B0wdCeJfy8Idf7NK8H_2_BUg.I
+
+```
+6. Compile the ETag values for each file part that you uploaded into a JSON-formatted file.
+```bash
+
+{
+    "Parts": [
+        {
+            "PartNumber": 1,
+            "ETag": "ab47a9ed63009ce441aa366dc51f94cb",
+        },
+        {
+            "PartNumber": 8,
+            "ETag": "019387cec8eaf0fdb0c922337429669a",
+        },
+        {
+            "PartNumber": 9,
+            "ETag": "aa1f9bfd6346f2b7d5373678069bb55c",
+        },
+        {
+            "PartNumber": 10,
+            "ETag": "6eaadb0b242eedb45e317b91c679e9fd",
+        },
+        {
+            "PartNumber": 11,
+            "ETag": "193789939516b89b74ab20ac5724b3c5",
+        },
+        {
+            "PartNumber": 12,
+            "ETag": "0787ec49c727d308b8b624d4e872990c",
+        },
+        {
+            "PartNumber": 13,
+            "ETag": "4a28537f6df05eb9a48c8f25136543d0",
+        }
+    ]
+}
+```
+6. Run the following command to complete the multipart upload. Replace the value for --multipart-upload with the path to the JSON-formatted file with ETags that you created
+```bash
+ aws s3api complete-multipart-upload --multipart-upload file://file_parts.json --bucket testing234123241423 --key OSR507V_vmware_1.0.0Di.iso --upload-id 4VUqRgZUEJNaH3Kx_atia0VhS5yHFXy9Lhs2nZPK7vf7ie3ECSnTUF0YLFVP15eVACi69agkeQlHtOfbxAHrDIuTr_bELhYvzxASh8B0wdCeJfy8Idf7NK8H_2_BUg.I
+{
+    "ServerSideEncryption": "AES256",
+    "Location": "https://testing234123241423.s3.us-east-1.amazonaws.com/OSR507V_vmware_1.0.0Di.iso",
+    "Bucket": "testing234123241423",
+    "Key": "OSR507V_vmware_1.0.0Di.iso",
+    "ETag": "\"04f593e3e674d6488115398478229355-7\""
+}
+
+```
+
