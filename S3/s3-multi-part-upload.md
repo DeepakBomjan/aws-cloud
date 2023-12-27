@@ -151,3 +151,47 @@ aws s3api list-parts --bucket testing234123241423 --key OSR507V_vmware_1.0.0Di.i
 
 ```
 
+## Byte-range fetch
+
+```bash
+ aws s3api get-object \
+    --bucket testing234123241423 \
+    --key OSR507V_vmware_1.0.0Di.iso \
+    --range "bytes=1000-30000000" \
+    output.txt
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "2023-12-24T22:06:09+00:00",
+    "ContentLength": 1000,
+    "ETag": "\"04f593e3e674d6488115398478229355-7\"",
+    "ContentRange": "bytes 1000-1999/726966272",
+    "ContentType": "binary/octet-stream",
+    "ServerSideEncryption": "AES256",
+    "Metadata": {}
+}
+```
+## Using curl
+```bash
+#!/bin/sh 
+outputFile="/PATH/TO/LOCALLY/SAVED/FILE"
+amzFile="BUCKETPATH/TO/FILE"
+region="YOUR-REGION"
+bucket="SOME-BUCKET"
+resource="/${bucket}/${amzFile}"
+contentType="binary/octet-stream"
+dateValue=`TZ=GMT date -R`
+# You can leave our "TZ=GMT" if your system is already GMT (but don't have to)
+stringToSign="GET\n\n${contentType}\n${dateValue}\n${resource}"
+s3Key="ACCESS_KEY_ID"
+s3Secret="SECRET_ACCESS_KEY"
+signature=`echo -en ${stringToSign} | openssl sha1 -hmac ${s3Secret} -binary | base64`
+curl -H "Host: s3-${region}.amazonaws.com" \
+     -H "Date: ${dateValue}" \
+     -H "Content-Type: ${contentType}" \
+     -H "Authorization: AWS ${s3Key}:${signature}" \
+     https://s3-${region}.amazonaws.com/${bucket}/${amzFile} -o $outputFile
+
+```
+
+Ref:
+https://stackoverflow.com/questions/30876123/script-to-download-file-from-amazon-s3-bucket

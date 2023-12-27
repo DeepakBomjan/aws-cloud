@@ -11,9 +11,9 @@ from s3_multipart_upload import (
 def main():
     # Replace these values with your AWS S3 and file details
     local_file_path = "/Users/logpoint//Downloads/OpenServer-6.0.0Ni-2006-02-08-1513.iso"
-    bucket_name = "testingpythonmulti"
+    bucket_name = "testingmultipartupload"
     object_key = "/Users/logpoint//Downloads/OpenServer-6.0.0Ni-2006-02-08-1513.iso"
-    file_size_mb = 50  # Size of the file in megabytes
+    file_size_mb = 25  # Size of the file in megabytes
 
     print("Performing multipart upload with default configuration...")
     thread_info_default = upload_with_default_configuration(local_file_path, bucket_name, object_key, file_size_mb)
