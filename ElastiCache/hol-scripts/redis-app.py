@@ -25,7 +25,7 @@ def fetch(sql):
     ttl = 10 # Time to live in seconds
     try:
        params = config(section='redis')
-       cache = redis.Redis.from_url(params['redis_url'])
+       cache = redis.Redis(host=params['redis_host'],ssl=True)
        result = cache.get(sql)
 
        if result:

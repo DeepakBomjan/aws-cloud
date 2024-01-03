@@ -17,3 +17,6 @@ JOIN
   products p ON od.product_id = p.product_id
 ORDER BY
   c.customer_id, o.order_id, od.line_item_id;
+
+dcc5deaa-08dd-4e43-b9da-c5ee6b47ddec
+9ba5e607-7d3d-4cb6-803b-37e25b1d792a

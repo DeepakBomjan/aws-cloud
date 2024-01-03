@@ -19,8 +19,13 @@ sudo apt-get install redis
 [Connect to the cluster's node](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/GettingStarted.ConnectToCacheNode.html)
 ```bash
 redis-cli --tls -h test-cache-isrefg.serverless.use1.cache.amazonaws.com -p 6379
+
+client = redis.Redis(host='test-cache-isrefg.serverless.use1.cache.amazonaws.com',ssl=True,ssl_ca_certs=None)
+
 ```
 
 
 [Python connection to AWS ElastiCache Redis](https://github.com/cloud-gov/aws-redis-example/tree/main/python)
+
+
 

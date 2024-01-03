@@ -1,7 +1,8 @@
 # /usr/bin/python2.7
 import psycopg2
 from configparser import ConfigParser
-from flask import Flask   
+from flask import Flask  
+import redis 
 
 def config(filename='database.ini', section='postgresql'):
     # create a parser
@@ -21,17 +22,43 @@ def config(filename='database.ini', section='postgresql'):
     return db
 
 def fetch(sql):
+    ttl = 10
     # connect to database listed in database.ini
-    conn = connect()
-    cur = conn.cursor()
-    cur.execute(sql)
-    # fetch one row
-    result = cur.fetchone()
-    print('Closing connection to database...')
-    cur.close() 
-    conn.close()
+    # conn = connect()
+    # cur = conn.cursor()
+    # cur.execute(sql)
+    # # fetch one row
+    # result = cur.fetchone()
+    # print('Closing connection to database...')
+    # cur.close() 
+    # conn.close()
 
-    return result
+    # return result
+
+    ## With redis
+    try:
+        params = config(section='redis')
+        cache = redis.Redis.from_url(params['redis_url'])
+        result = cache.get(sql)
+    
+        if result:
+            return result
+        else:
+            #connect to database listed in databse.ini
+            conn = connect()
+            cur = conn.cursor()
+            #fetch one row
+            result = cur.fetchone()
+            print('Closing connection to database...')
+            cur.close()
+            conn.close()
+            
+            # cache result
+            cache.setex(sql, ttl, ''.join(result))
+            return result
+            
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
 def connect():
     """ Connect to the PostgreSQL database server and return a cursor """

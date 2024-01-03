@@ -1,63 +1,50 @@
--- Create the vet_clinic database
-CREATE DATABASE vet_clinic;
+-- Create the database
+CREATE DATABASE university;
 
--- Connect to the vet_clinic database
-\c vet_clinic
+-- Connect to the database
+\c university;
 
--- Set permissions for the public schema
-GRANT ALL PRIVILEGES ON SCHEMA public TO your_user; -- Replace with your actual username
-
--- Create the species table
-CREATE TABLE species (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100)
+-- Create the students table
+CREATE TABLE students (
+    student_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    date_of_birth DATE
 );
 
--- Create the owners table
-CREATE TABLE owners (
-  id SERIAL PRIMARY KEY,
-  full_name VARCHAR(100),
-  age INTEGER,
-  email VARCHAR(120)
+-- Create the courses table
+CREATE TABLE courses (
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(100),
+    instructor VARCHAR(100)
 );
 
--- Create the vets table
-CREATE TABLE vets (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100),
-  age INTEGER,
-  date_of_graduation DATE
+-- Create the enrollments table
+CREATE TABLE enrollments (
+    enrollment_id SERIAL PRIMARY KEY,
+    student_id INTEGER REFERENCES students(student_id),
+    course_id INTEGER REFERENCES courses(course_id),
+    enrollment_date DATE
 );
 
--- Create the animals' table
-CREATE TABLE animals (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100),
-  date_of_birth DATE,
-  escape_attempts INTEGER,
-  neutered BOOLEAN,
-  weight_kg DECIMAL,
-  species_id INTEGER REFERENCES species(id),
-  owner_id INTEGER REFERENCES owners(id)
-);
+-- Insert sample data into the students table
+INSERT INTO students (first_name, last_name, date_of_birth)
+VALUES 
+    ('John', 'Doe', '1995-03-15'),
+    ('Jane', 'Smith', '1998-07-22'),
+    ('Bob', 'Johnson', '1993-11-10');
 
--- Create the specializations join table
-CREATE TABLE specializations (
-  vet_id INTEGER REFERENCES vets(id),
-  species_id INTEGER REFERENCES species(id),
-  PRIMARY KEY (vet_id, species_id)
-);
+-- Insert sample data into the courses table
+INSERT INTO courses (course_name, instructor)
+VALUES 
+    ('Introduction to Computer Science', 'Dr. Smith'),
+    ('Mathematics for Beginners', 'Prof. Johnson'),
+    ('History of Art', 'Dr. Davis');
 
--- Create the visits join table
-CREATE TABLE visits (
-  animal_id INTEGER REFERENCES animals(id),
-  vet_id INTEGER REFERENCES vets(id),
-  date_of_visit DATE,
-  PRIMARY KEY (animal_id, vet_id, date_of_visit)
-);
-
--- Set indexes
-CREATE INDEX ON visits (animal_id);
-CREATE INDEX ON visits (vet_id);
-CREATE INDEX ON owners (email);
-
+-- Insert sample data into the enrollments table
+INSERT INTO enrollments (student_id, course_id, enrollment_date)
+VALUES 
+    (1, 1, '2022-01-10'),
+    (1, 2, '2022-01-12'),
+    (2, 1, '2022-01-15'),
+    (3, 3, '2022-01-20');
