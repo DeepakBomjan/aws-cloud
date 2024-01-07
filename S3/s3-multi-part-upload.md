@@ -155,9 +155,9 @@ aws s3api list-parts --bucket testing234123241423 --key OSR507V_vmware_1.0.0Di.i
 
 ```bash
  aws s3api get-object \
-    --bucket testing234123241423 \
-    --key OSR507V_vmware_1.0.0Di.iso \
-    --range "bytes=1000-30000000" \
+    --bucket testingbucket123142352 \
+    --key index.html \
+    --range "bytes=1-20" \
     output.txt
 {
     "AcceptRanges": "bytes",
@@ -195,3 +195,14 @@ curl -H "Host: s3-${region}.amazonaws.com" \
 
 Ref:
 https://stackoverflow.com/questions/30876123/script-to-download-file-from-amazon-s3-bucket
+
+
+
+
+
+for part in $(ls OSR507V_vmware_1.0.0Di.isoa*)
+do
+echo "uploading $part ..."
+aws s3api upload-part --bucket testingbucket123142352 --key OSR507V_vmware_1.0.0Di.iso --part-number $c --body $part --upload-id crjyVO.7YjemaLKv2Q5qFYO8eWX92MxivHjo0IGide_LbUPZ3cgckfJ3dVnvcse3_X0dxiJnFI4irBy_1oujBej65o.750cbyazNFIWbbbY00jmRfLRX6yL3gn8npf5G
+c=$((c+1))
+done
