@@ -89,7 +89,7 @@ EXPOSE 8080
 ENV NAME World
 
 # Run your_filename.py when the container launches
-CMD ["python", "app.py"]
+CMD ["python", "index.py"]
 
 ```
 
@@ -102,4 +102,25 @@ docker build -t flask-app .
 ```bash
 docker run -p 8080:8080 flask-app
 
+```
+
+## Using docker compose
+
+```bash
+version: '3'
+services:
+  my-python-app:
+    build: .
+    image: my-python-app:latest
+    container_name: my-python-container
+    ports:
+      - "8080:8080"
+    environment:
+      - NAME=World
+
+```
+## Commands
+```bash
+docker-compose build
+docker-compose up
 ```
