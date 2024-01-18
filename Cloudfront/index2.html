@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .post {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .post img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* .download-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        } */
+        .download-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 8px; /* Adjust the padding to make the button smaller */
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px; /* Adjust the font size to make the text smaller */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="post">
+        <img src="images/beach-418742.jpeg" alt="Photo 1">
+        <p>A breathtaking view of a mountain landscape, with lush greenery and clear blue skies.</p>
+        <a href="images/beach-418742.jpeg" download="Photo1.jpg" class="download-btn">Download</a>
+    </div>
+
+    <div class="post">
+        <img src="images/beautiful-green-field-scenery-picjumbo-com.jpeg" alt="Photo 2">
+        <p>Sunset over a tranquil lake, reflecting the warm hues of the sky and creating a peaceful atmosphere.</p>
+        <a href="images/beautiful-green-field-scenery-picjumbo-com.jpeg" download="Photo2.jpg" class="download-btn">Download</a>
+    </div>
+
+    <div class="post">
+        <img src="images/flower-field-250016.jpeg" alt="Photo 3">
+        <p>A close-up shot of vibrant flowers in a meadow, showcasing the beauty of nature's colors.</p>
+        <a href="images/flower-field-250016.jpeg" download="Photo3.jpg" class="download-btn">Download</a>
+    </div>
+
+    <!-- Add more posts as needed -->
+
+</body>
+
+</html>
