@@ -106,3 +106,5 @@ export RABBITMQ_HOST=amqps://<username>:<password>@<rabbitmq-endpoint>:<rabbitmq
     ```
 
 [Lab References](https://dev.to/aws-builders/simple-event-driven-app-using-amazon-mq-rabbitmq-22b0)
+
+[rabbitmq server Client Code with Design pattern and Metaclass](https://github.com/soumilshah1995/rabbitmq-python-server-client/tree/master)
