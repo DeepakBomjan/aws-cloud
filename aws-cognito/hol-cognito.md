@@ -1,6 +1,7 @@
 ## Before We Begin
 [Script link](https://github.com/natonic/AWS_SA_Pro/tree/master/webIdentityFederation)
 
+![image](../images/Working_with_Web_Identity_Federation_to_Authenticate_AWS_Account_Access_for_a_Remote_User.png)
 
 ## Create an EC2 Instance
 To create an EC2 Instance, we need to perform the following:
@@ -124,3 +125,19 @@ The *ARN* and the `<AssumedRoleID>` from the *Response* section of the *Web Iden
 ## Conclusion
 
 Congratulations—you've completed the lab!
+
+## Additional Resources
+
+Please log into the AWS environment by using the cloud_user credentials provided above. Once inside the AWS account, make sure you are using us-east-1 (N. Virginia) as the selected region.
+
+In a second browser window or tab, get to the Web-Identity Federation Playground:
+
+https://web-identity-federation-playground.s3.amazonaws.com/index.html
+
+In yet another browser window or tab, download the python script here:
+
+https://github.com/natonic/AWS_SA_Pro/tree/master/webIdentityFederation (NOTE: do not use the depreciated file)
+
+Simply right click on the file named originalWebFed.py and click Save as to save the file locally.
+
+URL Decoder Tool: https://www.samltool.com/url.php
