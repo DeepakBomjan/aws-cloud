@@ -14,7 +14,7 @@ In this practical assignment, you'll delve into the utilization of Amazon Athena
 7. Leave the rest of the settings as default.
 8. Skip to the bottom and click **Create bucket**.
 ## 2. Create the VPC Flow Log and Generate Records
-1.Navigate to the **VPC console** in a new tab.
+1. Navigate to the **VPC console** in a new tab.
 2. Select the **Your VPCs** menu on the left-hand side.
 3. Find and select **Your Custom VPC**.
 4. Within the menu, find and select **Flow logs**.
