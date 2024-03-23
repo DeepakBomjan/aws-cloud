@@ -136,3 +136,7 @@ If you are receiving a DDL error when attempting to run the **MSCK** command, ex
     ```sql
     DROP DATABASE vpc_flow_logs_db;
     ```
+## Troubleshooting
+
+https://repost.aws/knowledge-center/athena-analyze-vpc-flow-logs
+
