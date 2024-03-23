@@ -1,5 +1,5 @@
 # Create a Lambda Function Using the AWS Management Console
-
+![image](../../images/CLF-CO2-lambda.jpg)
 ## Introduction
 In this practical workshop, you will create a Lambda function utilizing the Python programming language directly within the AWS console. Additionally, you'll explore and analyze logs produced by CloudWatch as part of the exercise.
 
